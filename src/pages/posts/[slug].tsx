@@ -2,12 +2,9 @@ import {FC} from 'react';
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import avatar from "../../../public/avatar.jpg";
-import {Post} from "@/pages/api/posts";
+import posts from "../../../public/posts.json";
 
 export async function getStaticPaths() {
-    const res = await fetch('http://localhost:3000/api/posts')
-    const posts: Post[] = await res.json()
-
     const paths = posts.map((post) => ({
         params: { slug: post.id },
     }))
