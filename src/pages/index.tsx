@@ -13,7 +13,7 @@ export default function Home() {
         (This is a sample website)</p>
         <h3>Blog</h3>
         <ul>
-            <li><Link href="/posts/ssg-ssr">When to Use Static Generation v.s. Server-side Rendering</Link></li>
+            <li><Link href="/posts/ssg-ssr" prefetch={false}>When to Use Static Generation v.s. Server-side Rendering</Link></li>
         </ul>
     </>
   )
