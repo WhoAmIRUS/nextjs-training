@@ -24,6 +24,7 @@ export const getStaticPaths: GetStaticPaths<PageParams> = async () => {
 }
 
 export const getStaticProps: GetStaticProps<SlugProps, PageParams> = async ({ params }) => {
+    console.log('getStaticProps');
     return { props: { post: posts.find(post => post.id === params!.slug)! } }
 }
 

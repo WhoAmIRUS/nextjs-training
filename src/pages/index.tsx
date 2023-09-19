@@ -25,6 +25,9 @@ const Home: FC<{ posts: Post[]}> = ({ posts }) => {
                     <Link href={`/posts/${post.id}`}>{post.title}</Link>
                 </li>
             ))}
+            <li>
+                <Link href={`/ssr`}>SSR example</Link>
+            </li>
         </ul>
     </>
   )
