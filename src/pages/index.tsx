@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import avatar from '../../public/avatar.jpg';
 import posts from "../../public/posts.json";
 import {FC} from "react";
 import {Post} from "@/pages/api/posts";
@@ -13,7 +12,7 @@ const Home: FC<{ posts: Post[]}> = ({ posts }) => {
   return (
     <>
         <div className="flex items-center flex-col">
-            <Image src={avatar} width={144} height={144} className="rounded-full" alt='Picture of the author' />
+            <Image src='/images/avatar.jpg' width={144} height={144} className="rounded-full" alt='Picture of the author' />
             <h1 className="text-center">Dmitrii Glazkov</h1>
         </div>
         <p>Hello, I’m <b>Dmitrii</b>. I’m a Frontend Developer. You can contact me on <a href={"https://web.telegram.org/k/#@dmglazkov"} target="_blank">Telegram</a>.

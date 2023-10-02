@@ -1,11 +1,10 @@
 import {FC} from 'react';
-import { useRouter } from 'next/router'
 import Image from "next/image";
-import avatar from "../../../public/avatar.jpg";
 import posts from "../../../public/posts.json";
 import {GetStaticPaths, GetStaticProps} from "next";
 import {ParsedUrlQuery} from "querystring";
 import {Post} from "@/pages/api/posts";
+import Link from "next/link";
 
 interface PageParams extends ParsedUrlQuery {
     slug: string;
@@ -32,10 +31,13 @@ const Slug: FC<SlugProps> = ({ post }) => {
     return (
         <>
             <div className="flex items-center flex-col">
-                <Image src={avatar} width={144} height={144} className="rounded-full" alt='Picture of the author' />
+                <Image src='/images/avatar.jpg' width={144} height={144} className="rounded-full" alt='Picture of the author' />
                 <h2 className="mt-0">Dmitrii Glazkov</h2>
             </div>
             <h1>{post.title}</h1>
+            <h2>
+                <Link href="/">Back to home</Link>
+            </h2>
         </>
     );
 };

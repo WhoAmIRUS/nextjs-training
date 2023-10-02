@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import Image from "next/image";
-import avatar from "../../../public/avatar.jpg";
+import avatar from "../../../public/images/avatar.jpg";
+import Link from 'next/link';
 
 export const getServerSideProps = async () => {
     console.log('getServerSideProps');
@@ -18,6 +19,9 @@ const SSR: FC = (props) => {
                 <h2 className="mt-0">Dmitrii Glazkov</h2>
             </div>
             <h1>SSR example</h1>
+            <h2>
+                <Link href="/">Back to home</Link>
+            </h2>
         </>
     );
 };
