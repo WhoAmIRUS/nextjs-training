@@ -3,15 +3,17 @@ import Image from "next/image";
 import posts from "../../../public/posts.json";
 import {GetStaticPaths, GetStaticProps} from "next";
 import {ParsedUrlQuery} from "querystring";
-import {Post} from "@/pages/api/posts";
 import Link from "next/link";
+import {serialize} from "next-mdx-remote/serialize";
+import {MDXRemote, MDXRemoteSerializeResult} from "next-mdx-remote";
+import {getPostContent} from "@/lib/posts";
 
 interface PageParams extends ParsedUrlQuery {
     slug: string;
 }
 
 interface SlugProps {
-    post: Post;
+    post: MDXRemoteSerializeResult;
 }
 
 export const getStaticPaths: GetStaticPaths<PageParams> = async () => {
@@ -24,7 +26,10 @@ export const getStaticPaths: GetStaticPaths<PageParams> = async () => {
 
 export const getStaticProps: GetStaticProps<SlugProps, PageParams> = async ({ params }) => {
     console.log('getStaticProps');
-    return { props: { post: posts.find(post => post.id === params!.slug)! } }
+    const fileContents = getPostContent(params!.slug)
+    const mdxSource = await serialize(fileContents)
+
+    return { props: { post: mdxSource } }
 }
 
 const Slug: FC<SlugProps> = ({ post }) => {
@@ -34,7 +39,7 @@ const Slug: FC<SlugProps> = ({ post }) => {
                 <Image src='/images/avatar.jpg' width={144} height={144} className="rounded-full" alt='Picture of the author' />
                 <h2 className="mt-0">Dmitrii Glazkov</h2>
             </div>
-            <h1>{post.title}</h1>
+            <MDXRemote {...post} />
             <h2>
                 <Link href="/">Back to home</Link>
             </h2>
