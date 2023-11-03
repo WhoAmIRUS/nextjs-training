@@ -7,9 +7,14 @@ import {Post} from "@/pages/api/posts";
 
 // Server Component
 const getPosts = async (): Promise<Post[]> => {
-    const result = await fetch('https://jsonplaceholder.typicode.com/posts', { cache: 'no-store' }).then((res) => res.json());
+    const posts = await fetch('https://jsonplaceholder.typicode.com/posts', { cache: 'no-store' }).then((res) => res.json());
+
+    for (const post of posts) {
+        await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, { cache: 'no-store' }).then((res) => res.json());
+        await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`, { cache: 'no-store' }).then((res) => res.json());
+    }
     console.log('fetched');
-    return result;
+    return posts;
 }
 
 const PostsList = async ({ counter }: { counter: number }) => {
