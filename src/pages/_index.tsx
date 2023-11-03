@@ -1,14 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
 import posts from "../../public/posts.json";
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 import {Post} from "@/pages/api/posts";
 
 export const getStaticProps = async () => {
-    return { props: { posts } }
+    return new Promise(resolve => {
+        setTimeout(() => resolve({ props: { posts } }), 2000)
+    });
 }
 
 const Home: FC<{ posts: Post[]}> = ({ posts }) => {
+    // const [data, setData] = useState<Post[]>([])
+    //
+    // useEffect(() => {
+    //     setTimeout(() => setData(posts), 2000)
+    // }, [])
+
   return (
     <>
         <div className="flex items-center flex-col">
