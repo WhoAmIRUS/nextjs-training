@@ -11,7 +11,7 @@ const getPosts = async (): Promise<Post[]> => {
 
     for (const post of posts) {
         await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, { cache: 'no-store' }).then((res) => res.json());
-        await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`, { cache: 'no-store' }).then((res) => res.json());
+        // await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`, { cache: 'no-store' }).then((res) => res.json());
     }
     console.log('fetched');
     return posts;
