@@ -22,6 +22,7 @@ const SSR: FC = (props) => {
             <h2>
                 <Link href="/">Back to home</Link>
             </h2>
+            <button onClick={() => console.log(123)}>123</button>
         </>
     );
 };

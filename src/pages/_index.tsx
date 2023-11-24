@@ -4,10 +4,15 @@ import posts from "../../public/posts.json";
 import {FC, useEffect, useState} from "react";
 import {Post} from "@/pages/api/posts";
 
-export const getStaticProps = async () => {
-    return new Promise(resolve => {
-        setTimeout(() => resolve({ props: { posts } }), 2000)
-    });
+export const getServerSideProps = async () => {
+    const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json());
+    console.log(posts);
+    for (const post of posts) {
+        await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`).then((res) => res.json()).then(console.log);
+        // await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`, { cache: 'no-store' }).then((res) => res.json());
+    }
+    console.log('fetched');
+    return posts;
 }
 
 const Home: FC<{ posts: Post[]}> = ({ posts }) => {

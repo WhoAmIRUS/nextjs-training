@@ -6,6 +6,7 @@ export type Post = {
   id: string;
   title: string;
   date: string;
+  body: string;
 }
 
 export default function handler(
